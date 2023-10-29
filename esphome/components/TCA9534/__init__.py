@@ -6,23 +6,15 @@ from esphome.const import CONF_CHANNEL, CONF_CHANNELS, CONF_ID, CONF_SCAN
 CODEOWNERS = ["@jdominguez199"]
 
 DEPENDENCIES = ["i2c"]
-
+CONF_I2C_ADDR = 0x38
 tca9534a_ns = cg.esphome_ns.namespace("tca9534a")
 TCA9534AComponent = tca9534a_ns.class_("TCA9548AComponent", cg.Component, i2c.I2CDevice)
 
 MULTI_CONF = True
 
-CONF_BUS_ID = "bus_id"
-CONFIG_SCHEMA = (
-    cv.Schema(
-        {
-            cv.GenerateID(): cv.declare_id(TCA9534AComponent),
-            cv.Optional(CONF_SCAN): cv.invalid("This option has been removed"),
-        }
-    )
-    .extend(i2c.i2c_device_schema(0x38))
-    .extend(cv.COMPONENT_SCHEMA)
-)
+CONFIG_SCHEMA = cv.Schema({
+    cv.GenerateID(): cv.declare_id(tca9534a_ns)
+}).extend(cv.COMPONENT_SCHEMA).extend(i2c.i2c_device_schema(CONF_I2C_ADDR))
 
 
 async def to_code(config):
