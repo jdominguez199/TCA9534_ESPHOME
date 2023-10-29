@@ -11,7 +11,7 @@ Using Platformio library: "sparkfun/SparkFun Qwiic GPIO TCA9534 Arduino Library@
 namespace esphome {
 namespace tca9534a {
 
-class TCA9548AComponent : public Component, public i2c::I2CDevice {
+class TCA9534AComponent : public Component, public i2c::I2CDevice {
  public:
   void setup() override;
   void dump_config() override;
